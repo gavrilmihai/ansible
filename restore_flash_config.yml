@@ -1,0 +1,23 @@
+---
+
+- name: "GET-Running Config and Save them "
+  gather_facts: 'no'
+  hosts: "{{ dev }}"
+  vars:
+    ansible_python_interpreter: "/usr/local/bin/python3"
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_user: "sdaadmin"
+    ansible_password: "C!sc0123"
+    ansible_become: "yes"
+    ansible_become_method: enable
+    ansible_became_password: "C!sc0123"
+  tasks:
+      
+    - name: "TASK1: Copy Reference Config into StarUp Config and Reload"
+      ios_command:
+        commands: 
+          - command: "copy {{ inventory_hostname | lower }}-{{ ref }}.cfg startup-config \n"
+            answer: "\r" 
+          - command: "reload \n"
+            answer: "\r" 

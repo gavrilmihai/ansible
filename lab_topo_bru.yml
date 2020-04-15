@@ -1,0 +1,48 @@
+---
+ansible_python_interpreter: "/usr/local/bin/python3"
+ansible_connection: network_cli
+ansible_network_os: ios
+ansible_user: "sdaadmin"
+ansible_password: "C!sc0123"
+ansible_become: "yes"
+ansible_become_method: enable
+ansible_become_password: "C!sc0123"
+globals:
+  username: sdaadmin
+  password: "C!sc0123"
+  vc_user1: "AS%5Cgrusu"
+  vc_user2: "AS\\grusu"
+  vc_pass: "Gabr1el99"
+  vc: "10.48.59.22"
+  dc: "SDA-POD1"
+csrv:
+  Pod1-1T:
+    esxi: "10.48.59.22/SDA-POD1/host/SDA-Cluster/"
+    vcenter: "10.48.59.22"
+    datacenter: "SDA-POD1"
+    cluster: "SDA-Cluster"
+    g1_map: "GigabitEthernet1=VLAN978-M4-1-and-2"
+    g2_map: "GigabitEthernet2=VLAN10-M4-1-and-2"
+    g3_map: "GigabitEthernet3=VLAN10-M4-1-and-2"
+    store: "Coheas172_SDAPOD1"
+    mgmt_ip: "10.50.222.87"
+    mgmt_ipv4_gateway: "10.50.222.1"
+    mgmt_ipv4_network: "10.0.0.0/8"
+    isis_net: "49.0192.0168.0000.0087.00"
+    g2_ip: "192.168.10.87"
+    l0_ip: "192.168.0.87"
+
+  Pod1-GB:
+    esxi: "10.48.59.22/SDA-POD1/host/SDA-Cluster/"
+    vcenter_server: "10.48.59.22"
+    vcenter_dc: "SDA-POD1"
+    g1_map: "GigabitEthernet1=VLAN978-M4-1-and-2"
+    g2_map: "GigabitEthernet2=VLAN10-M4-1-and-2"
+    g3_map: "GigabitEthernet3=VLAN10-M4-1-and-2"
+    store: "Coheas172_SDAPOD1"
+    mgmt_ip: "10.50.222.88"
+    mgmt_ipv4_gateway: "10.50.222.1"
+    mgmt_ipv4_network: "10.0.0.0/8"
+    isis_net: "49.0192.0168.0000.0088.00"
+    g2_ip: "192.168.10.88"
+    l0_ip: "192.168.0.88"

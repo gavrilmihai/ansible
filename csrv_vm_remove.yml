@@ -1,0 +1,31 @@
+---
+
+- name: Remove CSR virtual machines
+  gather_facts: no
+  vars_files:
+    - lab_topo_bru.yml
+  hosts: localhost
+  tasks:
+    - name: "PowerOFF Virtual Machine"
+      vmware_guest:
+        hostname: "{{ item.value.vcenter }}"
+        datacenter: "{{ item.value.datacenter }}"
+        username: "{{ globals.vcenter_user2 }}"
+        password: "{{ globals.vcenter_pass }}"
+        validate_certs: no
+        name: "{{ item.key }}"
+        state: poweredoff
+      with_dict: "{{ csrv }}"
+
+    - name: Remove Virtual Machine 
+      vmware_guest:
+        datacenter: "{{ item.value.datacenter }}"
+        cluster: "{{ item.value.cluster }}"
+        username: "{{ globals.vcenter_user2 }}"
+        password: "{{ globals.vcenter_pass }}"
+        validate_certs: no
+        name: "{{ item.key }}"
+        state: absent
+      with_dict: "{{ csrv }}"
+      delegate_to: localhost
+      register: facts

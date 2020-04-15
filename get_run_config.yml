@@ -1,0 +1,36 @@
+---
+
+- name: "GET-Running Config and Save them "
+  gather_facts: 'no'
+  hosts: "{{ dev }}"
+  vars:
+    ansible_python_interpreter: "/usr/local/bin/python3"
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_user: "sdaadmin"
+    ansible_password: "C!sc0123"
+    ansible_become: "yes"
+    ansible_become_method: enable
+    ansible_became_password: "C!sc0123"
+  tasks:
+    - name: "TASK1: Get timestamp from the system"
+      shell: "date +%d%m%Y"
+      register: tstamp
+      delegate_to: localhost
+      
+    - name: "TASK2: GATHER SHOW Running Configs from Devices"
+      ios_command:
+        commands: 
+          - show running-config 
+      register: cli_result
+
+    - name: "TASK3: Create outputs folder"
+      file:
+        path: "~/Documents/Work-{{ tstamp.stdout[-4:] }}/Configs/{{ dir }}-{{ tstamp.stdout }}"
+        state: directory
+      run_once: true       
+
+    - name: "TASK3: Create outputs files in output folder"
+      copy:
+        content: "{{ cli_result.stdout[0] }} \n"
+        dest: "~/Documents/Work-{{ tstamp.stdout[-4:] }}/Configs/{{ dir }}-{{ tstamp.stdout }}/{{ inventory_hostname }}-ref-{{ ref }}.cfg"

@@ -1,0 +1,19 @@
+---
+
+- name: "PERFORM IOS Show Version Brief"
+  gather_facts: "no"
+  hosts: "{{ dev }}"
+  vars_files:
+    'lab_vars.yml'        
+
+  tasks:
+    - name: GATHER SHOW VERSION
+      ios_command:
+        commands: 
+          - "show version | in 16."
+      register: stdout_lines
+
+    - name: DUMP OUTPUT TO TERMINAL
+      debug:
+        msg: 
+        - The Device with IP {{ ansible_host }} have {{ stdout_lines['stdout_lines'][0][0] }}

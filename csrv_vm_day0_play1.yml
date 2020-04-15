@@ -1,0 +1,8 @@
+- name: Deploy CSR in VMWARE using PlayBook
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  vars_files:
+    - 'lab_topo_bru.yml'
+  roles:
+    - { role: csrv_add_vm }

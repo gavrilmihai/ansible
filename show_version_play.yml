@@ -1,0 +1,17 @@
+- name: Show Versions Play
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  vars_files:
+    - 'lab_vars.yml'
+  roles:
+    - { role: show_ver, tags: [ 'tag1' ]}
+
+- name: Show Versions Play
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  vars_files:
+    - 'lab_vars.yml'
+  roles:
+    - { role: show_ips, tags: [ 'tag2' ] }

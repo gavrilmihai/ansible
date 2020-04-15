@@ -1,0 +1,8 @@
+- name: Stop Packet Captures Set
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  vars_files:
+    - 'lab_captures.yml'
+  roles:
+    - { role: stop_capture }

@@ -1,0 +1,27 @@
+---
+
+- name: "GET-Running Config and Save them "
+  gather_facts: 'no'
+  hosts: "{{ dev }}"
+  vars:
+    ansible_python_interpreter: "/usr/local/bin/python3"
+    ansible_connection: network_cli
+    ansible_network_os: ios
+    ansible_user: "sdaadmin"
+    ansible_password: "C!sc0123"
+    ansible_become: "yes"
+    ansible_become_method: enable
+    ansible_became_password: "C!sc0123"
+    ansible_stdout_callback: debug
+  tasks:
+    - name: "TASK1: Start Monitor Capture "
+      ios_command:
+        commands: 
+          - monitor capture CaptureA interface {{ int }} both buffer circular match any
+          - monitor capture CaptureA start
+          - show monitor capture 
+      register: result
+
+    - name: "TASK2: Show Capture Status"
+      debug:
+        msg: "{{ result.stdout_lines[2] }}"

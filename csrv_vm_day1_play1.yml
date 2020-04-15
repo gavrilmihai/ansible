@@ -1,0 +1,10 @@
+- name: Adding DAY1 Configurations to CSRs
+  hosts: localhost
+  gather_facts: False
+  connection: local
+  vars_files:
+    - 'lab_topo_bru.yml'
+  roles:
+    - { role: csrv_add_isis }
+    - { role: csrv_add_ip }
+    - { role: csrv_add_route }

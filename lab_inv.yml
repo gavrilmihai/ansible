@@ -1,0 +1,32 @@
+[sda1]
+Pod1_SS ansible_host=10.50.220.64
+Pod1_1B1 ansible_host=10.50.220.65
+Pod1_1B2 ansible_host=10.50.220.66
+Pod1_1E1 ansible_host=10.50.220.67
+Pod1_1E2 ansible_host=10.50.220.68
+[sda1:vars]
+ansible_become_password="Dragon1234"
+ansible_user="dnaadmin"
+[s1]
+3850_1B1 ansible_host=10.48.172.60
+3850_1B2 ansible_host=10.48.172.61
+asr1k_1B3 ansible_host=10.48.82.187
+3850_1E ansible_host=10.48.172.58
+csrv_GB ansible_host=10.48.172.11
+[s1:vars]
+ansible_become_password="C!sc0123"
+ansible_user="sdaadmin"
+ansible_netconf_password="C!sc0123"
+ansible_net_username="sdaadmin"
+[s2]
+3850_2B ansible_host=10.48.172.51
+3850_2E ansible_host=10.48.172.59
+9800_2W ansible_host=10.48.82.195
+csrv_1T ansible_host=10.48.172.10
+
+[s3]
+9300_3B ansible_host=10.48.172.63
+3650_3E ansible_host=10.48.172.57
+[S]
+3850_1S ansible_host=10.48.172.170
+2901_1F ansible_host=10.48.172.49

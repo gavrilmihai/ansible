@@ -1,0 +1,29 @@
+---
+- name: PERFORM COMPLIANCE CHECKS
+  hosts: iosxe
+  connection: local
+  gather_facts: no
+  vars:
+    provider:
+      username: sdaadmin
+      password: C!sc0123
+      host: "{{ inventory_hostname }}"
+  tasks:
+    - name: "GATHER SHOW VERSION"
+      ios_command:
+        commands: "show version"
+        provider: "{{ provider }}"
+      register: output
+    - name: DUMP OUTPUT TO TERMINAL
+      debug:
+        #var: output
+        msg: "{{ vars.provider }}"
+    - name: VERIFY OS AND CONFIG REGISTER
+      assert:
+        that:
+          - "'Version 16.12' in output['stdout'][0]"
+          - "'Configuration register is 0x102' in output['stdout'][0]"
+    - name: ENSURE SNMP RO EXISTS
+      ios_config:
+        commands: "snmp-server community public RO"
+        provider: "{{ provider }}"

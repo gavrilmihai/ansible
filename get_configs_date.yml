@@ -1,0 +1,28 @@
+---
+- name: "PLAY 1:Capture and Store Configs "
+  hosts: routers
+  connection: network_cli
+  tasks:
+
+         - name: "Get timestamp from the system"
+           shell: "date +%d%m%Y"
+           register: tstamp
+         - name: "TASK 1: Get configuration"
+           ios_command:
+                   commands: "show running-config "
+           register: cli_result
+
+           #         - name: "TASK 2: Print collected output"
+           #debug:
+           #        msg: "{{cli_result}}"
+
+         - name: "TASK3: Create outputs folder"
+           file:
+                   path: "~/Documents/Work-{{ tstamp.stdout[-4:] }}/Configs/outputs-{{ tstamp.stdout }}"
+                   state: directory
+           run_once: true         
+
+         - name: "TASK5: Create outputs files in output folder"
+           copy:
+                   content: "{{ cli_result.stdout[0] }} \n"
+                   dest: "~/Documents/Work-{{ tstamp.stdout[-4:] }}/Configs/outputs-{{ tstamp.stdout }}/{{ inventory_hostname }}-ref-{{ ref }}.cfg"

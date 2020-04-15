@@ -1,0 +1,93 @@
+---
+
+ansoible_python_interpreter: "/usr/local/bin/python3"
+ansible_connection: network_cli
+ansible_network_os: ios
+ansible_become: "yes"
+ansible_become_method: enable
+ansible_user: "sdaadmin"
+ansible_password: "C!sc0123"
+ansible_enable: "C!sc0123"
+
+globals:
+  username: sdaadmin
+  password: C!sc0123
+  enable: C!sc0123
+  ftp_user: "root"
+  ftp_pass: "aka"
+  ftp_ip: "10.48.172.80"
+
+dev:
+  us:
+    pod1ss:
+      host: "10.201.40.14"
+    pod1cr:
+      host: "10.201.40.15"
+    pod1e1:
+      host: "10.201.40.16"
+    pod1e2:
+      host: "10.201.40.17"
+    pod1cs:
+      host: "10.201.40.18"
+    pod1gb:
+      host: "10.201.40.20"
+    pod2ss:
+      host: "10.201.40.34"
+    pod2cr:
+      host: "10.201.40.35"
+    pod2e1:
+      host: "10.201.40.36"
+    pod2e2:
+      host: "10.201.40.37"
+    pod2cs:
+      host: "10.201.40.38"
+    pod2gb:
+      host: "10.201.40.40"
+    pod3ss:
+      host: "10.201.40.54"
+    pod3cr:
+      host: "10.201.40.55"
+    pod3e1:
+      host: "10.201.40.56"
+    pod3e2:
+      host: "10.201.40.57"
+    pod3cs:
+      host: "10.201.40.58"
+    pod3gb:
+      host: "10.201.40.60"
+    pod4ss:
+      host: "10.201.40.74"
+    pod4cr:
+      host: "10.201.40.75"
+    pod4e1:
+      host: "10.201.40.76"
+    pod4e2:
+      host: "10.201.40.77"
+    pod4cs:
+      host: "10.201.40.78"
+    pod4gb:
+      host: "10.201.40.80"
+    pod5ss:
+      host: "10.201.40.94"
+    pod5cr:
+      host: "10.201.40.95"
+    pod5e1:
+      host: "10.201.40.96"
+    pod5e2:
+      host: "10.201.40.97"
+    pod5cs:
+      host: "10.201.40.98"
+    pod5gb:
+      host: "10.201.40.100"
+  br:  
+    pod1_IT:
+      host: "10.50.222.87"
+      user: "sdaadmin"
+      password: "C!sc0123"
+      enable: "C!sc0123"
+    pod1_GB:
+      host: "10.50.222.88"
+      user: "sdaadmin"
+      password: "C!sc0123"
+      enable: "C!sc0123"
+     

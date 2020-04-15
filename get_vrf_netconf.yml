@@ -1,0 +1,41 @@
+---
+- name: "PLAY 1:Capture and Store VRF Configs via Netconf "
+  hosts: "{{ dev }}"
+  gather_facts: yes
+  connection: netconf
+  vars:
+    ansible_python_interpreter: "/usr/local/bin/python3"
+    ansible_user: "sdaadmin"
+    ansible_net_username: "sdaadmin"
+    ansible_password: "C!sc0123"
+    ansible_become: "yes"
+    ansible_become_method: enable
+    ansible_became_password: "C!sc0123"
+  
+  tasks:
+    - name: "TASK1:Get VRF config with Netconf"
+      netconf_get:
+        source: running
+        filter: "<native><vrf></vrf></native>"
+      register: nc_vrf
+
+    - name: "TASK2:Format XML for easy Viewing"
+      xml:
+        xmlstring: "{{ nc_vrf.stdout }}"
+        pretty_print: true
+      register: pretty_config
+      changed_when: false
+    
+    - name: "TASK3:Ensure output folder exist"
+      file:
+        path: "netconf_outputs"
+        statte: directory
+      run_once: true
+
+    - name: "TASK3:Write XML to disk"
+      copy:
+        content: "{{ pretty_config.xmlstring }}"
+        dest: "netconf_outputs/{{ inventory_hostname }}_netconf.xml"
+    
+      
+   

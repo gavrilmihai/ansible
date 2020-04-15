@@ -1,0 +1,29 @@
+---
+
+ansoible_python_interpreter: "/usr/local/bin/python3"
+ansible_connection: network_cli
+ansible_network_os: ios
+ansible_become: "yes"
+ansible_become_method: enable
+ansible_user: "sdaadmin"
+ansible_password: "C!sc0123"
+ansible_enable: "C!sc0123"
+
+globals:
+  username: sdaadmin
+  password: C!sc0123
+  enable: C!sc0123
+  ftp_user: "root"
+  ftp_pass: "aka"
+  ftp_ip: "10.48.172.80"
+
+devs:
+  3850-2E:
+    host: "10.48.172.60"
+    int: "gi1/1/2"
+  3850-1B2:
+    host: "10.48.172.61"
+    int: "gi1/0/1"
+  3850-1E:
+    host: "10.48.172.58" 
+    int: "gi1/0/23"  

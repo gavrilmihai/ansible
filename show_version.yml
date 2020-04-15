@@ -1,0 +1,24 @@
+---
+
+- name: "PERFORM Show IOS Version and Compliancy Checks "
+  gather_facts: 'no'
+  hosts: "{{ dev }}"
+  vars_files:
+    'lab_vars.yml'        
+
+  tasks:
+    - name: GATHER SHOW VERSION
+      ios_command:
+        commands: 
+          - show version
+      register: output
+    - name: DUMP OUTPUT TO TERMINAL
+      debug:
+        msg: "{{ output['stdout'][0] }}"
+    
+    - name: VERIFY OS AND CONFIG REGISTER
+      assert:
+        that:
+          - "'Version 16.12' in output['stdout'][0]"
+          - "'Configuration register is 0x2102' in output['stdout'][0]"
+
