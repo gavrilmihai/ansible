@@ -1,0 +1,5 @@
+---
+
+- name: Adding Interface IP Config
+  include_tasks: csrv_add_ip.yml
+  with_dict: "{{ csrv }}"

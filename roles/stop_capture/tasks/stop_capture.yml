@@ -1,0 +1,46 @@
+---
+
+- name: Set Enviroment facts
+  set_fact:
+    ansible_host: "{{ item.value.host }}"
+
+- name: "TASK0: Get timestamp from the system"
+  shell: "date +%d%m%Y"
+  register: tstamp
+  delegate_to: localhost
+
+- name: "TASK1: Stop Monitor Capture {{ item.key }} "
+  ios_command:
+    commands: 
+      - monitor capture CaptureA stop
+
+- name: "TASK2: Export Packet Capture to Flash"
+  ios_command:
+    commands: 
+      - command: "monitor capture CaptureA export location flash:CaptureA.pcap \n"
+        answer: "\r"
+  
+- name: "TASK3: Check Export and Wait for it to finish"
+  ios_command:
+    commands: 
+      - monitor capture CaptureA export status
+    wait_for:
+      - result[0] contains "No export currently active"
+
+- name: "TASK4: Make Sure Ftp Server parameters are configured"
+  ios_config:
+    lines:
+      - ip ftp username root
+      - ip ftp password aka
+      - ip ftp source-interface gi0/0
+      - file prompt quiet
+
+- name: "TASK5: Transfer CaptureA to ftp://10.48.172.80/SDA/Captures/ and delete Capture"
+  ios_command:
+    commands: 
+      - copy CaptureA.pcap ftp://10.48.172.80/SDA/Captures/{{ item.key }}-{{ tstamp.stdout }}.pcap
+      - no monitor capture CaptureA
+
+- name: "TASK6: Get today Captures on my system"
+  shell: get-captures.sh
+  register: result

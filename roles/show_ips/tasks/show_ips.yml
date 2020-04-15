@@ -1,0 +1,17 @@
+---
+- name: Set fact
+  set_fact:
+    ansible_host: "{{ item.value.host }}"
+- name: The Device is 
+  debug:
+    msg: "{{ item.key }}"
+- name: "Retrive Device Versions" 
+  ios_command:
+    commands:
+     - show ip int brief
+  register: output
+
+- name: "Show Device Versions"
+  debug:
+    msg: "{{ output['stdout_lines'][0] }}"
+    #msg: "{{ output['stdout'][0] }}"

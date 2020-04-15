@@ -1,0 +1,5 @@
+---
+
+- name: Create CSR-VMs with basic day-0 config
+  include_tasks: csrv_add_vm.yml
+  with_dict: "{{ csrv }}"

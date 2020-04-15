@@ -1,0 +1,37 @@
+---
+
+- name: Create OVA with parameters
+  shell:
+    cot edit-properties csr1000v-universalk9.16.12.02s.ova \
+    -p hostname="{{ item.key }}" \
+    -p login-username="{{ globals.username }}" \
+    -p login-password="{{ globals.password }}" \
+    -p privilege-password="{{ globals.password }}" \
+    -p mgmt-interface="GigabitEthernet1" \
+    -p mgmt-ipv4-addr="{{ item.value.mgmt_ip }}/24" \
+    -p mgmt-ipv4-gateway="{{ item.value.mgmt_ipv4_gateway }}" \
+    -p mgmt-ipv4-network="{{ item.value.mgmt_ipv4_network }}" \
+    -p enable-ssh-server="true" \
+    -o csr1000v-universalk9.16.12.02s-{{ item.key}}.ova
+  ignore_errors: yes
+
+- name: Create CSRv instance
+  shell:
+    cot deploy csr1000v-universalk9.16.12.02s-{{ item.key }}.ova
+    esxi "{{ item.value.esxi }}"
+    -u "{{ globals.vc_user1 }}"
+    -p "{{ globals.vc_pass }}"
+    -c "1CPU-4GB"
+    -n {{ item.key }}
+    -P 
+    -N "{{ item.value.g1_map }}"
+    -N "{{ item.value.g2_map }}"
+    -N "{{ item.value.g3_map }}"
+    -d "{{ item.value.store }}"
+  ignore_errors: yes
+
+- name: Delete OVA file
+  file:
+    path: "csr1000v-universalk9.16.12.02s-{{ item.key}}.ova"
+    state: absent
+

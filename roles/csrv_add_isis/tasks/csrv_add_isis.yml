@@ -1,0 +1,14 @@
+---
+- name: Set Enviroment facts
+  set_fact:
+    ansible_host: "{{ item.value.mgmt_ip}}"
+- name: Configuring CSRV ISIS 
+  ios_config:
+    lines:
+      - net {{ item.value.isis_net }}
+      - is-type level-2-only
+      - domain-password brulab
+      - metric-style wide
+      - nsf ietf
+      - bfd all-interfaces
+    parents: router isis

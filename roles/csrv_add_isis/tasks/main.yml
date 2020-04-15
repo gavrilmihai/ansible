@@ -1,0 +1,5 @@
+---
+
+- name: ADD ISIS CONFIG
+  include_tasks: csrv_add_isis.yml
+  with_dict: "{{ csrv }}"

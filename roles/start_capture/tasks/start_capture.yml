@@ -1,0 +1,17 @@
+---
+
+- name: Set Enviroment facts
+  set_fact:
+    ansible_host: "{{ item.value.host }}"
+
+- name: "TASK1: Start Monitor Capture {{ item.key }} "
+  ios_command:
+    commands: 
+      - monitor capture CaptureA interface {{ item.value.int }} both buffer circular match any
+      - monitor capture CaptureA start
+      - show monitor capture 
+  register: result
+
+- name: "TASK2: Show Capture Status {{ item.key }} "
+  debug:
+    msg: "{{ result.stdout_lines[2] }}"

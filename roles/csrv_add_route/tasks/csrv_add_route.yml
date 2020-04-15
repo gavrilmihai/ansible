@@ -1,0 +1,22 @@
+---
+- name: Set Enviroment facts
+  set_fact:
+    ansible_host: "{{ item.value.mgmt_ip}}"
+- name: Adding Global Config
+  ios_config:
+    lines:
+      - ip http server
+      - file prompt quiet
+      - ip ftp username root
+      - ip ftp password aka
+
+- name: Task3:Get Config Output
+  ios_command:
+    commands: 
+      - "show ip interface brief"
+      - "show ip route"
+      - "show run | in route"
+  register: output
+- name: DUMP OUTPUT TO TERMINAL  
+  debug:
+    msg: "{{ output.stdout_lines }}"

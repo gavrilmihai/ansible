@@ -1,0 +1,9 @@
+- name: Set Globals
+  set_fact:
+    ansible_user: "{{ globals.username }}"
+    ansible_password: "{{ globals.password  }}"
+    ansible_enable: "{{ globals.enable  }}"
+- name: LAB TASK 1
+  include_tasks: show_ver.yml
+  with_dict: "{{ dev.br }}"
+  #when: " filter in item.key"

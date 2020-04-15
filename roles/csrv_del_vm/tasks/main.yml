@@ -1,0 +1,5 @@
+---
+
+- name: Power-Off then Delete CSR-VMs 
+  include_tasks: csrv_del_vm.yml
+  with_items: "{{ csrv }}"

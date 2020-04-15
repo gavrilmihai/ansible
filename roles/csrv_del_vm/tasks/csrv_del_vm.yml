@@ -1,0 +1,29 @@
+---
+
+- name: Power Off Selected VMs
+  vmware_guest:
+    hostname: "{{ globals.vc }}" 
+    datacenter: "{{ globals.dc }} "
+    username: "{{ globals.vc_user2 }}"
+    password: "{{ globals.vc_pass }}"
+    validate_certs: no
+    name: "{{ item.key }}"
+    state: poweredoff
+  delegate_to: localhost
+  register: facts
+  loop: "{{ csrv|dict2items }}"
+  ignore_errors: yes
+  
+- name: Delete Selected VMs
+  vmware_guest: 
+    hostname: "{{ globals.vc }}" 
+    datacenter: "{{ globals.dc }} "
+    username: "{{ globals.vc_user2 }}"
+    password: "{{ globals.vc_pass }}"
+    validate_certs: no
+    name: "{{ item.key }}"
+    state: absent
+  loop: "{{ csrv|dict2items }}"
+  ignore_errors: yes
+
+
