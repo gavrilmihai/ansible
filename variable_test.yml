@@ -1,0 +1,12 @@
+---
+
+- name: "See variables"
+  gather_facts: 'no'
+  hosts: localhost
+  vars_files:
+    - 'lab_captures.yml'
+  tasks:
+    - name: "Variable Loop"
+      debug:
+        msg: "{{ item.0 }} - {{ item.1 }}"
+      loop: "{{ set1|dictsort }}"

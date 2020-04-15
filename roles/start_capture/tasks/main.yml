@@ -2,4 +2,4 @@
 
 - name: Starting Packert Captures
   include_tasks: start_capture.yml
-  with_dict: "{{ devs }}"
+  loop: "{{ set1|dict2items }}"

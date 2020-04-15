@@ -2,4 +2,4 @@
 
 - name: Stoping Packert Captures and retrieve files on local
   include_tasks: stop_capture.yml
-  with_dict: "{{ devs }}"
+  loop: "{{ set1|dict2items }}"
