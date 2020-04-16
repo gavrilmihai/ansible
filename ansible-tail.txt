@@ -1,0 +1,4 @@
+ansible-playbook get_ref_config.yml -e dev=sda1 -e dir=pod1 -e ref=base -vv   #get the reference config from router flash
+ansible-playbook restore_flash_config.yml -e dev=sda1 -e ref=base #reload the router with config from flash 
+ansible-playbook start-packet-capture.yml -e dev=Pod1_SS -e int=gi1/0/13  #Start Packet Capture on Interface
+ansible-playbook stop-packet-capture.yml -e dev=Pod1_SS   #Get Packet capture on my Laptop

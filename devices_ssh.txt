@@ -1,0 +1,15 @@
+c2901_peg3_2,10.48.172.49,sdaadmin,C!sc0123,ww,c2901-peg3-2,show running-config,,
+3650_3E,10.48.172.57,sdaadmin,C!sc0123,C!sc0123,3650-3E,show running-config,,
+3850_1E,10.48.172.58,sdaadmin,C!sc0123,C!sc0123,3850-1E,show running-config,,
+3850_2E,10.48.172.59,sdaadmin,C!sc0123,C!sc0123,3850-2E,show running-config,,
+csrv_1T,10.48.172.10,sdaadmin,C!sc0123,C!sc0123,csrv-1T,show running-config,,x
+csrv_GB,10.48.172.11,sdaadmin,C!sc0123,C!sc0123,csrv-GB,show running-config,,x
+csrv_IN,10.48.172.12,sdaadmin,C!sc0123,C!sc0123,csrv-IN,show running-config,,x
+3850_1B1,10.48.172.60,sdaadmin,C!sc0123,C!sc0123,3850-1B1,show running-config,,
+3850_1B2,10.48.172.61,sdaadmin,C!sc0123,C!sc0123,3850-1B2,show running-config,,
+3850_2B,10.48.172.51,sdaadmin,C!sc0123,C!sc0123,3850-2B,show running-config,,
+wlc5520_1,10.48.172.48,sdaadmin,C!sc0123,ww,>,show run-config commands,,
+3850_1S,10.48.172.52,sdaadmin,C!sc0123,C!sc0123,3850-1S,show running-config,,
+3850_Sw1,10.48.84.8,sdaadmin,C!sc0123,C!sc0123,3850-sw1,show running-config,,
+9300_3B,10.48.172.63,sdaadmin,C!sc0123,C!sc0123,9300-3B,show running-config,,
+9800_2W,10.48.82.195,sdaadmin,C!sc0123,C!sc0123,9800-2WLC,show running-config,,
